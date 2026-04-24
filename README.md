@@ -2,7 +2,7 @@
 
 Personal portfolio site: [Astro](https://astro.build/) (static pages + server route for contact), Vue islands, MDX-ready, deployed with the [Cloudflare adapter](https://docs.astro.build/en/guides/integrations-guide/cloudflare/).
 
-**Repository:** [github.com/rajurayhan/raju-portfolio](https://github.com/rajurayhan/raju-portfolio)
+**Repository:** [github.com/rajurayhan/raju-portfolio](https://github.com/rajurayhan/raju-portfolio) · **Site:** [rajurayhan.com](https://rajurayhan.com) (Cloudflare)
 
 ## Requirements
 
@@ -39,7 +39,7 @@ Copy `.env.example` to `.env`. Nothing in `.env` is required for **local browsin
 
 | Variable | Purpose |
 |----------|---------|
-| `PUBLIC_SITE_URL` | Public site URL used for `site` in `astro.config.mjs` (canonical links, Open Graph, Twitter cards). Defaults to the GitHub Pages–style URL in config if unset. Set to your real domain (or full path if the site lives under a subpath). |
+| `PUBLIC_SITE_URL` | Public site URL for `site` in `astro.config.mjs` (canonical links, Open Graph, e.g. `https://rajurayhan.com/me-headshot.png`). Defaults to `https://rajurayhan.com` if unset. Set for staging, or a subpath if the site is not at the domain root. |
 | `RESEND_API_KEY` | [Resend](https://resend.com) API key — **required** for `POST /api/contact` to send email. |
 | `CONTACT_TO_EMAIL` | Inbox for contact form submissions. |
 | `CONTACT_FROM_EMAIL` | `From` address; must be allowed in your Resend domain or use their sandbox sender for tests. |
@@ -60,7 +60,7 @@ Copy `.env.example` to `.env`. Nothing in `.env` is required for **local browsin
 
 ## Deploying
 
-1. Set `PUBLIC_SITE_URL` in the host’s environment to your live URL before `npm run build`, so canonical and social meta tags match production.
+1. For production, `PUBLIC_SITE_URL` can stay unset; the build defaults to `https://rajurayhan.com`. Staging: set it explicitly before `npm run build` so meta tags match the preview URL.
 2. Configure the same Resend-related variables on the host if the contact form should work in production.
 3. Build output is **`dist/`**; the project targets **Cloudflare Pages** (see `astro.config.mjs` and `@astrojs/cloudflare`). Adjust the adapter or host if you use another platform.
 

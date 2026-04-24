@@ -4,9 +4,9 @@ import vue from '@astrojs/vue';
 import mdx from '@astrojs/mdx';
 import cloudflare from '@astrojs/cloudflare';
 
-// Set PUBLIC_SITE_URL in .env to your real domain in production.
+// Production URL (Open Graph, canonical). Override in .env for preview/staging.
 // See https://docs.astro.build/en/reference/configuration-reference/#site
-const site = process.env.PUBLIC_SITE_URL || 'https://rajurayhan.github.io/raju-portfolio';
+const site = process.env.PUBLIC_SITE_URL || 'https://rajurayhan.com';
 
 // https://astro.build/config
 export default defineConfig({
