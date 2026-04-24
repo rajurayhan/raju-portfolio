@@ -1,8 +1,8 @@
 /** Default site label and images — override per page via PortfolioLayout props */
 export const SITE_NAME = 'Raju Rayhan';
-export const DEFAULT_TITLE = 'Raju Rayhan — Portfolio';
+export const DEFAULT_TITLE = 'Raju Rayhan — Head of Development & AI Platform Architect';
 export const DEFAULT_DESCRIPTION =
-  'Head of Development at Sulus.ai. Platform architect for AI voice, automation, and production SaaS.';
+  'Head of Development at Sulus.ai. I architect production software: AI voice, SaaS, RAG, automation. 10+ years. Engineering lead, remote, Dhaka, Bangladesh.';
 export const DEFAULT_OG_IMAGE = '/me-headshot.png';
 export const LOCALE = 'en_US';
 export const THEME_COLOR = '#f2ece1';
