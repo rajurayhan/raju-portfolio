@@ -322,7 +322,7 @@ const countLabel = computed(() => {
   gap: 14px;
 }
 .work-row__title {
-  font-size: 32px;
+  font-size: clamp(22px, 5.5vw, 32px);
   color: var(--ink);
 }
 .work-row__client {

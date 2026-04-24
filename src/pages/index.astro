@@ -11,8 +11,11 @@ import Footer from '../components/Footer.astro';
   description="Head of Development at Sulus.ai. I architect production software: AI voice, SaaS, RAG, automation. 10+ years. Engineering lead, remote, Dhaka, Bangladesh."
 >
   <TopBar current="home" />
-  <div class="content" style="padding: 80px 40px 60px; position: relative">
-    <div style="display: grid; grid-template-columns: 1fr 280px; gap: 60px; align-items: start">
+  <div class="content home-hero-wrap" style="padding: 80px 40px 60px; position: relative">
+    <div
+      class="home-hero"
+      style="display: grid; grid-template-columns: 1fr minmax(0, 280px); gap: 60px; align-items: start"
+    >
       <div>
         <div class="eyebrow" style="margin-bottom: 22px">{'// File: portfolio/index — last touched 24.04.2026'}</div>
         <h1 class="display" style="font-size: clamp(48px, 8vw, 112px); margin: 0; color: var(--ink)">
@@ -51,7 +54,10 @@ import Footer from '../components/Footer.astro';
         <div class="rule-ascii">────────────────────────</div>
       </div>
     </div>
-    <div class="note" style="position: absolute; top: 110px; right: -10px; width: 180px; transform: rotate(2deg)">
+    <div
+      class="note home-side-note"
+      style="position: absolute; top: 110px; right: 0; max-width: 180px; transform: rotate(2deg)"
+    >
       Ten years of shipping. Mostly in the quiet hours before standup.
     </div>
   </div>
@@ -214,8 +220,20 @@ import Footer from '../components/Footer.astro';
 
 <style>
   @media (max-width: 960px) {
-    .content > div:first-of-type {
+    .home-hero {
       grid-template-columns: 1fr !important;
+      gap: 36px !important;
+    }
+    .home-hero-wrap {
+      padding-top: 40px !important;
+      padding-bottom: 40px !important;
+    }
+    .home-side-note {
+      position: static !important;
+      max-width: none !important;
+      width: 100% !important;
+      transform: none !important;
+      margin-top: 8px;
     }
     .whoami-grid {
       grid-template-columns: 1fr !important;

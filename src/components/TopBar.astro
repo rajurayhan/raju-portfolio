@@ -15,19 +15,27 @@ const items: { id: 'home' | 'work' | 'sulus' | 'about' | 'contact'; label: strin
 ];
 ---
 
-<header class="topbar">
+<header class="topbar" id="site-topbar">
   <a class="brand" href="/" style="text-decoration: none; color: inherit">
     <div class="brand-mark" aria-hidden="true">R</div>
-    <div>
+    <div class="brand-text">
       <div style="line-height: 1">Raju Rayhan</div>
-      <div
-        style="font-size: 10.5px; color: var(--muted); font-weight: 400; margin-top: 2px; letter-spacing: 0.04em"
-      >
+      <div class="brand-sub" style="font-size: 10.5px; color: var(--muted); font-weight: 400; margin-top: 2px; letter-spacing: 0.04em">
         Head of Development · AI Platform Architect
       </div>
     </div>
   </a>
-  <nav>
+  <button
+    type="button"
+    class="topbar__toggle"
+    id="topbar-menu-btn"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="site-nav"
+  >
+    <span class="topbar__toggle-bars" aria-hidden="true"></span>
+  </button>
+  <nav id="site-nav" class="topbar-nav" aria-label="Main">
     {
       items.map((it) => (
         <a class:list={{ active: current === it.id }} href={it.href}>
@@ -43,7 +51,32 @@ const items: { id: 'home' | 'work' | 'sulus' | 'about' | 'contact'; label: strin
     <ThemeToggle client:load />
     <div class="status">
       <span class="status-dot" />
-      <span>Available · Q3 2026</span>
+      <span class="status-text">Available · Q3 2026</span>
     </div>
   </div>
 </header>
+
+<script is:inline>
+  (function () {
+    var bar = document.getElementById('site-topbar');
+    var btn = document.getElementById('topbar-menu-btn');
+    var nav = document.getElementById('site-nav');
+    if (!bar || !btn || !nav) return;
+    function setOpen(on) {
+      bar.classList.toggle('topbar--open', on);
+      btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+      btn.setAttribute('aria-label', on ? 'Close menu' : 'Open menu');
+    }
+    btn.addEventListener('click', function () {
+      setOpen(!bar.classList.contains('topbar--open'));
+    });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        setOpen(false);
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  })();
+</script>
