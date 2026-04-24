@@ -12,6 +12,7 @@
     "preview": "npm run build && wrangler dev",
     "astro": "astro",
     "deploy": "npm run build && wrangler deploy",
+    "generate:og": "node scripts/generate-og-image.mjs",
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
@@ -23,6 +24,7 @@
     "vue": "^3.5.0"
   },
   "devDependencies": {
+    "sharp": "^0.34.5",
     "typescript": "^5.6.0",
     "wrangler": "^4.85.0"
   }

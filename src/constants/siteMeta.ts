@@ -4,7 +4,10 @@ export const SITE_NAME = 'Raju Rayhan';
 export const ROLE_IN_TITLE = 'Head of Development @ Sulus.ai';
 export const DEFAULT_TITLE = `Raju Rayhan — ${ROLE_IN_TITLE}`;
 export const DEFAULT_DESCRIPTION = `${ROLE_IN_TITLE}. I architect production software: AI voice, SaaS, RAG, automation. 10+ years. Engineering lead, remote, Dhaka, Bangladesh.`;
-export const DEFAULT_OG_IMAGE = '/me-headshot.png';
+/** Default share image — 1200×630 card; regenerate with `npm run generate:og` */
+export const DEFAULT_OG_IMAGE = '/og-card.png';
+export const OG_IMAGE_WIDTH = 1200;
+export const OG_IMAGE_HEIGHT = 630;
 export const LOCALE = 'en_US';
 export const THEME_COLOR = '#f2ece1';
 export const GITHUB_URL = 'https://github.com/rajurayhan/raju-portfolio';
