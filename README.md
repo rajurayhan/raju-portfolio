@@ -61,7 +61,21 @@ Copy `.env.example` to `.env`. Nothing in `.env` is required for **local browsin
 ## Deploying
 
 1. For production, `PUBLIC_SITE_URL` can stay unset; the build defaults to `https://rajurayhan.com`. Staging: set it explicitly before `npm run build` so meta tags match the preview URL.
-2. Configure the same Resend-related variables on the host if the contact form should work in production.
-3. Build output is **`dist/`**; the project targets **Cloudflare Pages** (see `astro.config.mjs` and `@astrojs/cloudflare`). Adjust the adapter or host if you use another platform.
+2. Build output is **`dist/`**; the project targets **Cloudflare Pages** (see `astro.config.mjs` and `@astrojs/cloudflare`). Adjust the adapter or host if you use another platform.
 
 After changing domains, re-validate social previews (e.g. Facebook Sharing Debugger, X card preview) so caches refresh.
+
+### Cloudflare Pages: `RESEND_API_KEY` and other env vars
+
+The contact route reads secrets from **Cloudflare’s runtime** (`locals.runtime.env`), not from the browser. Set these in the Cloudflare dashboard so they are available to the Worker that runs your Astro server code.
+
+1. Open [Cloudflare Dashboard](https://dash.cloudflare.com) → **Workers & Pages** → select your **Pages** project (the one connected to this repo).
+2. Go to **Settings** → **Variables and Secrets** (or **Environment variables**, depending on UI).
+3. Add variables for **Production** (and **Preview** if you want the form to work on preview deployments too). Use the **exact** names from `.env.example`:
+   - **`RESEND_API_KEY`** — use **Encrypt** / treat as a secret; value is the key from [Resend](https://resend.com/api-keys).
+   - **`CONTACT_TO_EMAIL`** and **`CONTACT_FROM_EMAIL`** — plain text is fine; `FROM` must match a domain or sender you verified in Resend.
+4. **Save** and trigger a **new deployment** (redeploy) so the Worker picks up new values.
+
+**Local preview with Wrangler:** create a **`.dev.vars`** file in the project root (do not commit it; add to `.gitignore` if not already ignored) with the same `KEY=value` lines. Wrangler injects them when you run `npm run preview` or `wrangler pages dev`, mimicking production.
+
+**Do not** put `RESEND_API_KEY` in client-side or `PUBLIC_*` variables — it would leak in the browser bundle. This project keeps it server-only; Cloudflare is the right place to store it.
