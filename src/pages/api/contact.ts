@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
+import { buildContactEmailHtml } from '../../lib/contactEmailTemplate';
 
 export const prerender = false;
 
@@ -64,12 +65,21 @@ export const POST: APIRoute = async ({ request, locals }) => {
   ]
     .filter(Boolean)
     .join('\n');
+  const html = buildContactEmailHtml({
+    name,
+    email,
+    company,
+    budget,
+    engagement,
+    message,
+  });
   const { error } = await resend.emails.send({
     from,
     to: [to],
     replyTo: email,
-    subject: `Portfolio: ${name}`,
+    subject: `Portfolio · message from ${name}`,
     text,
+    html,
   });
   if (error) {
     return new Response(JSON.stringify({ error: error.message || 'Resend error' }), { status: 502 });

@@ -46,7 +46,7 @@ Copy `.env.example` to `.env`. Nothing in `.env` is required for **local browsin
 
 ## Features (at a glance)
 
-- **Contact form** — Server API route (`src/pages/api/contact.ts`) using Resend.
+- **Contact form** — Server API route (`src/pages/api/contact.ts`) using Resend. Outbound messages include a **branded HTML body** (inline styles, portfolio colors) and a plain-text fallback, built in `src/lib/contactEmailTemplate.ts`.
 - **Theme** — Day / night stored as `raju-theme` in `localStorage`, applied to `html[data-theme]`.
 - **SEO / social** — Per-page titles and descriptions, Open Graph, Twitter cards, canonical URLs, and JSON-LD via `src/layouts/PortfolioLayout.astro` and `src/constants/siteMeta.ts`.
 
