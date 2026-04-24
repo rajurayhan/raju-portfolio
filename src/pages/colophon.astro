@@ -1,0 +1,50 @@
+---
+import PortfolioLayout from '../layouts/PortfolioLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import Footer from '../components/Footer.astro';
+import ColophonBody from '../components/ColophonBody.mdx';
+---
+
+<PortfolioLayout title="Colophon — Raju Rayhan">
+  <TopBar current="home" />
+  <div class="content mdx-colophon" style="padding: 64px 40px 80px; max-width: 720px">
+    <div class="mdx-prose">
+      <ColophonBody />
+    </div>
+  </div>
+  <Footer />
+</PortfolioLayout>
+
+<style is:global>
+  .mdx-prose h1 {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin: 0 0 1rem;
+    color: var(--ink);
+  }
+  .mdx-prose p,
+  .mdx-prose li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .mdx-prose ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.2rem;
+  }
+  .mdx-prose strong {
+    color: var(--ink);
+  }
+  .mdx-prose a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+  }
+  .mdx-prose a:hover {
+    background: var(--accent);
+    color: var(--paper);
+    border-bottom-color: var(--accent);
+  }
+</style>

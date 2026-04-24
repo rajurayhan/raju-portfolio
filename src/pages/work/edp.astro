@@ -1,0 +1,181 @@
+---
+import PortfolioLayout from '../../layouts/PortfolioLayout.astro';
+import TopBar from '../../components/TopBar.astro';
+import Footer from '../../components/Footer.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import CaseDecision from '../../components/CaseDecision.astro';
+---
+
+<PortfolioLayout title="eDP — Case study">
+  <TopBar current="sulus" />
+  <div
+    class="content"
+    style="border-bottom: 1px solid var(--rule); padding: 12px 0; font-size: 11px; color: var(--muted); font-family: var(--mono); max-width: 1100px; margin: 0 auto; padding-left: 40px; padding-right: 40px; box-sizing: border-box"
+  >
+    <a href="/work" style="color: inherit; text-decoration: none">← work</a>
+    <span style="margin: 0 10px">/</span>
+    <span style="color: var(--ink)">edp — defense procurement</span>
+  </div>
+  <div class="detail-hero">
+    <div class="content" style="padding: 0">
+      <div class="kicker">
+        <span>Case 02</span>
+        <span style="color: var(--muted)">·</span>
+        <span style="color: var(--muted)">2019 — 2023</span>
+        <span style="color: var(--muted)">·</span>
+        <span style="color: var(--muted)">Government platform</span>
+      </div>
+      <h1>
+        <span style="font-style: italic">eDP</span> <span style="color: var(--accent)">—</span> Defense Procurement
+      </h1>
+      <div class="sub">
+        A national defense-procurement platform for the Bangladesh Directorate General of Defense Purchase (DGDP),
+        Ministry of Defense. Live at edp.gov.bd. Architected as a Java Spring Boot microservices system with a React
+        frontend and Oracle backbone — role-scoped, audit-logged, and built to survive procurement cycles measured in
+        years.
+      </div>
+      <div style="display: flex; gap: 8px; margin-top: 22px; flex-wrap: wrap">
+        {['Java', 'Spring Boot', 'Microservices', 'React', 'Oracle', 'Redis', 'Swagger', 'Docker'].map((t) => <span class="chip">{t}</span>)}
+      </div>
+    </div>
+  </div>
+  <div class="content" style="padding: 40px 40px">
+    <div class="case-metrics" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px">
+      <div class="metric"><div class="v">4y</div><div class="k">Architect · Team Lead</div></div>
+      <div class="metric"><div class="v">12+</div><div class="k">Microservices shipped</div></div>
+      <div class="metric"><div class="v">gov</div><div class="k">Production · edp.gov.bd</div></div>
+      <div class="metric"><div class="v">∞</div><div class="k">Audit trail retention</div></div>
+    </div>
+  </div>
+  <div class="content" style="padding: 36px 40px">
+    <SectionHead num="01" title="The brief" />
+    <div class="case-two">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 8px">Context</div>
+        <p style="font-size: 13.5px; line-height: 1.7; color: var(--ink-soft)">
+          DGDP manages defense procurement for the Bangladesh Armed Forces. Tenders, bidders, contracts, amendments,
+          deliveries, and audits — all of which had lived on paper, email, and a patchwork of legacy tools. The mandate:
+          bring the whole pipeline online with the discipline the domain deserves.
+        </p>
+        <div class="eyebrow" style="margin-bottom: 8px; margin-top: 22px">Constraints</div>
+        <ul style="padding-left: 18px; font-size: 13px; line-height: 1.75; color: var(--ink-soft)">
+          <li>High-security posture — every action is auditable, signed, and reviewable.</li>
+          <li>Multi-role workflows — procurement officers, vendors, auditors, senior command.</li>
+          <li>On-prem Oracle; no cloud-managed DB options on the table.</li>
+          <li>Procurement regulations change by gazette, not by JIRA.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="note" style="width: 100%; transform: rotate(2deg)">
+          The hardest part wasn't writing the code. It was mapping a decades-old paper process into a schema that could
+          survive the next decade without another rewrite.
+          <div style="margin-top: 12px; font-size: 12px; font-family: var(--mono); color: var(--muted); font-style: normal">
+            — from the architecture notes
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content" style="padding: 36px 40px">
+    <SectionHead num="02" title="The architecture" meta="simplified" />
+    <pre class="ascii-box">         ┌──────────────────────┐     ┌──────────────────────┐
+         │  Officer Portal      │     │  Vendor Portal       │
+         │  React · role-scoped │     │  React · KYC gated   │
+         └──────────┬───────────┘     └──────────┬───────────┘
+                    │                            │
+                    └─────────────┬──────────────┘
+                                  │
+                     ┌────────────▼────────────┐
+                     │      API Gateway        │
+                     │  auth · routing · logs  │
+                     └────────────┬────────────┘
+                                  │
+     ┌────────────────┬───────────┼───────────┬────────────────┐
+     │                │           │           │                │
+┌────▼────┐    ┌──────▼──────┐ ┌──▼───┐  ┌────▼─────┐   ┌──────▼──────┐
+│ Tender  │    │  Bidder /   │ │ Doc  │  │ Contract │   │   Audit &   │
+│ Service │    │  KYC        │ │ Vault│  │ Service  │   │  Notification│
+└────┬────┘    └──────┬──────┘ └──┬───┘  └────┬─────┘   └──────┬──────┘
+     │                │           │           │                │
+     └────────────────┴────┬──────┴───────────┴────────────────┘
+                           │
+                   ┌───────▼────────┐       ┌───────────┐
+                   │   Oracle DB    │◄──────┤   Redis   │
+                   │ · partitioned  │       │ · sessions│
+                   │ · audit-logged │       │ · queues  │
+                   └────────────────┘       └───────────┘</pre>
+  </div>
+  <div class="content" style="padding: 36px 40px">
+    <SectionHead num="03" title="A few decisions" />
+    <CaseDecision num="03.1" title="Microservices along domain seams, not team seams">
+      We split services by procurement lifecycle — tender, bidder, contract, audit, documents — so each piece could
+      evolve at its own cadence as regulations changed. Team boundaries moved; service boundaries didn't have to.
+    </CaseDecision>
+    <CaseDecision num="03.2" title="Every mutation produces an audit event, always">
+      The audit service was first-class, not bolted on. Every state transition across every service emitted a signed
+      event consumed by a dedicated audit store. When the comptroller asked a question, we had an answer in one query —
+      not a forensic expedition across logs.
+    </CaseDecision>
+    <CaseDecision num="03.3" title="Role-scoped views over permission flags">
+      Instead of a tangle of boolean permissions, we modeled roles as composable scopes. An auditor saw a different UI
+      from an officer from the same endpoint, because the endpoint shaped its response to the caller. Fewer bugs, fewer
+      leaks.
+    </CaseDecision>
+    <CaseDecision num="03.4" title="Oracle is not Postgres — stop pretending">
+      We leaned into Oracle's strengths — partitioned tables for tender archives, proper materialized views for
+      dashboards, PL/SQL where it actually earned its keep — instead of writing the platform as if the DB were
+      interchangeable.
+    </CaseDecision>
+  </div>
+  <div class="content" style="padding: 36px 40px">
+    <SectionHead num="04" title="Outcomes" />
+    <div class="grid grid-2">
+      <div style="padding: 24px; border: 1px solid var(--rule); background: var(--paper-2)">
+        <div class="eyebrow" style="color: var(--muted); margin-bottom: 10px">Before</div>
+        <ul style="padding-left: 16px; font-size: 13px; line-height: 1.8; color: var(--ink-soft)">
+          <li>Tender documents shuttled by hand between offices</li>
+          <li>Bidder verification stretched over weeks, manually</li>
+          <li>Audit trail reconstructed after the fact, if at all</li>
+          <li>Amendments lost in email threads</li>
+        </ul>
+      </div>
+      <div style="padding: 24px; border: 1px solid var(--ink); background: var(--paper)">
+        <div class="eyebrow" style="color: var(--accent); margin-bottom: 10px">After</div>
+        <ul style="padding-left: 16px; font-size: 13px; line-height: 1.8; color: var(--ink-soft)">
+          <li>End-to-end procurement online at edp.gov.bd</li>
+          <li>Digital KYC + role-scoped bidder onboarding</li>
+          <li>Every action signed, every state change audit-logged</li>
+          <li>Amendments versioned, diffed, and traceable</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="content" style="padding: 48px 40px 24px">
+    <div
+      style="display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-top: 1px dashed var(--rule); border-bottom: 1px dashed var(--rule); flex-wrap: wrap; gap: 12px"
+    >
+      <div>
+        <div class="eyebrow" style="margin-bottom: 4px">Next case</div>
+        <div class="display" style="font-size: 28px; font-style: italic">The Hive — Internal AI ops</div>
+      </div>
+      <a class="arrow-link" href="/work/hive">Read next →</a>
+    </div>
+  </div>
+  <Footer />
+</PortfolioLayout>
+
+<style>
+  .case-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  @media (max-width: 800px) {
+    .case-two {
+      grid-template-columns: 1fr;
+    }
+    .case-metrics {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+</style>

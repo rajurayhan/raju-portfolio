@@ -1,0 +1,35 @@
+---
+import PortfolioLayout from '../../layouts/PortfolioLayout.astro';
+import TopBar from '../../components/TopBar.astro';
+import Footer from '../../components/Footer.astro';
+import WorkBook from '../../components/vue/WorkBook.vue';
+---
+
+<PortfolioLayout title="Work — Raju Rayhan">
+  <TopBar current="work" />
+  <div class="content" style="padding: 64px 40px 40px">
+    <div class="eyebrow" style="margin-bottom: 16px">§ The Casebook · 6 entries</div>
+    <h1 class="display" style="font-size: clamp(40px, 6vw, 84px); margin: 0">
+      <span style="font-style: italic">Work</span>, in chronological
+      <br />
+      <span style="color: var(--accent)">disobedience.</span>
+    </h1>
+    <div
+      style="font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--ink-soft); margin-top: 22px; max-width: 620px; line-height: 1.5"
+    >
+      A selection of shipped work — enterprise platforms, AI systems, personal experiments, and the open-source tools
+      that came out of them.
+    </div>
+  </div>
+  <WorkBook client:load />
+  <div class="content" style="padding: 40px 40px 0">
+    <div style="text-align: center; padding: 32px 0; border-top: 1px dashed var(--rule); border-bottom: 1px dashed var(--rule)">
+      <div style="font-family: var(--display); font-style: italic; font-size: 32px; margin-bottom: 8px">
+        Have a thorny platform?
+      </div>
+      <div style="color: var(--ink-soft); margin-bottom: 18px">I'll read it honestly and tell you where the load-bearing walls are.</div>
+      <a class="btn" href="/contact">Book a diagnostic call →</a>
+    </div>
+  </div>
+  <Footer />
+</PortfolioLayout>

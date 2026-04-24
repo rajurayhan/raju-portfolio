@@ -1,0 +1,41 @@
+---
+interface Props {
+  current: 'home' | 'work' | 'sulus' | 'about' | 'contact';
+}
+
+const { current } = Astro.props;
+const items: { id: 'home' | 'work' | 'sulus' | 'about' | 'contact'; label: string; href: string }[] = [
+  { id: 'home', label: 'Home', href: '/' },
+  { id: 'work', label: 'Work', href: '/work' },
+  { id: 'sulus', label: 'Case Study', href: '/work/sulus' },
+  { id: 'about', label: 'About', href: '/about' },
+  { id: 'contact', label: 'Contact', href: '/contact' },
+];
+---
+
+<header class="topbar">
+  <a class="brand" href="/" style="text-decoration: none; color: inherit">
+    <div class="brand-mark" aria-hidden="true">R</div>
+    <div>
+      <div style="line-height: 1">Raju Rayhan</div>
+      <div
+        style="font-size: 10.5px; color: var(--muted); font-weight: 400; margin-top: 2px; letter-spacing: 0.04em"
+      >
+        Head of Development · AI Platform Architect
+      </div>
+    </div>
+  </a>
+  <nav>
+    {
+      items.map((it) => (
+        <a class:list={{ active: current === it.id }} href={it.href}>
+          {String(items.indexOf(it) + 1).padStart(2, '0')} · {it.label}
+        </a>
+      ))
+    }
+  </nav>
+  <div class="status">
+    <span class="status-dot" />
+    <span>Available · Q3 2026</span>
+  </div>
+</header>

@@ -1,0 +1,217 @@
+---
+import PortfolioLayout from '../layouts/PortfolioLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Footer from '../components/Footer.astro';
+
+const timeline = [
+  {
+    when: 'Apr 2026 — present',
+    role: 'Head of Development',
+    co: 'Sulus.ai · Full-time',
+    bullets: [
+      'Appointed Head of Development at Sulus.ai after its spin-out from Lighthouse Graphics.',
+      'Overseeing engineering, product architecture, and technical strategy across the platform.',
+    ],
+    current: true,
+  },
+  {
+    when: 'May 2023 — Apr 2026',
+    role: 'Software Development Lead',
+    co: 'Lighthouse Graphics · Remote',
+    bullets: [
+      'Architected & led development of Sulus.ai — multi-tenant SaaS for AI voice agents.',
+      'Published MCP server packages bridging Laravel with n8n and QuickBooks.',
+      'Built a conversational AI agent system for runtime voice-assistant configuration.',
+      'Architected a Pinecone-backed KB with full tenant isolation by reseller.',
+      'Built The Hive — internal ops platform integrating OpenAI, Slack, ClickUp & GHL.',
+    ],
+  },
+  {
+    when: 'Oct 2019 — May 2023',
+    role: 'Sr. Software Engineer & Team Lead',
+    co: 'SIMEC System Limited',
+    bullets: [
+      'Architected eDP — a defense procurement platform for Bangladesh DGDP.',
+      'Java Spring Boot microservices · React · Oracle.',
+      'Delivered e-commerce, HR, and school-management systems alongside.',
+    ],
+  },
+  {
+    when: 'Jun 2018 — Oct 2019',
+    role: 'Software Engineer',
+    co: 'Gugu Corporation, Japan · Remote · Part-time',
+    bullets: ['Built SaaS-based, test-driven web applications to Japanese quality standards.'],
+  },
+  {
+    when: 'Aug 2018 — Nov 2019',
+    role: 'Software Engineer',
+    co: 'Adbox Bangladesh',
+    bullets: [
+      'Integrated telecom billing & VAS products for Robi and Banglalink.',
+      'Maintained Telco VAS and wired up bKash payments.',
+    ],
+  },
+  {
+    when: 'Jan 2016 — Mar 2018',
+    role: 'Web Developer',
+    co: 'Krazy IT · Bangladesh Wing',
+    bullets: [
+      'Built data-driven web apps for Australian clients; backend APIs for mobile.',
+      'Shipped an Inventory Management System plus custom business apps.',
+    ],
+  },
+];
+
+const skills: Record<string, string[]> = {
+  Backend: ['PHP', 'Laravel', 'Node.js', 'NestJS', 'Python', 'Java', 'Spring Boot', 'CodeIgniter'],
+  Frontend: ['Vue.js', 'React', 'Angular', 'jQuery', 'HTML/CSS'],
+  'AI & Voice': ['Claude API', 'OpenAI API', 'MCP', 'RAG / Vector DB', 'Pinecone', 'ElevenLabs', 'Deepgram', 'Pipecat'],
+  Automation: ['n8n', 'GoHighLevel', 'Twilio', 'Stripe', 'Yelp API', 'Slack', 'HubSpot', 'Zoho', 'ClickUp'],
+  Databases: ['MySQL', 'PostgreSQL', 'Supabase', 'MongoDB', 'Redis', 'Oracle', 'SQL Server'],
+  'DevOps & Testing': ['Docker', 'Jest', 'Cypress', 'Swagger'],
+};
+
+const strengths = [
+  'AI platform architecture',
+  'System design & scalability',
+  'Team leadership & mentoring',
+  'Business-to-technical analysis',
+  'Async / remote collaboration',
+];
+---
+
+<PortfolioLayout title="About — Raju Rayhan">
+  <TopBar current="about" />
+  <div class="content" style="padding: 64px 40px 36px">
+    <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: start" class="about-grid">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 16px">§ About · /etc/raju.conf</div>
+        <h1 class="display" style="font-size: clamp(40px, 5vw, 72px); margin: 0; line-height: 0.95">
+          A decade of
+          <br />
+          <span style="color: var(--accent)">shipping</span> <span style="font-style: italic">things</span>
+          <br />
+          that had to work.
+        </h1>
+        <div
+          style="font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--ink-soft); line-height: 1.55; margin-top: 28px; max-width: 620px"
+        >
+          I'm Raju — a platform architect and full-stack lead based in Dhaka. I've spent the last ten years shipping
+          production SaaS systems, most recently in voice AI and intelligent automation. I like tidy abstractions, honest
+          documentation, and small teams that trust each other.
+        </div>
+        <div style="display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap">
+          <a class="btn" href="/contact">Work with me →</a>
+        </div>
+      </div>
+      <div>
+        <div class="avatar">
+          <div class="avatar-initials" aria-hidden="true">R</div>
+        </div>
+        <div style="font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-top: 10px; letter-spacing: 0.06em">
+          [ upload a headshot — the placeholder is a friend ]
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--paper-2)">
+    <div class="content" style="padding: 24px 40px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; font-size: 12px" class="strengths-strip">
+      {
+        strengths.map((s, i) => (
+          <div>
+            <div style="color: var(--accent); font-family: var(--mono); font-size: 10.5px; margin-bottom: 6px">
+              {String(i + 1).padStart(2, '0')}
+            </div>
+            <div style="color: var(--ink); font-weight: 500">{s}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="content" style="padding: 56px 40px 20px">
+    <SectionHead num="01" title="A working timeline" meta="2016 — present" />
+    <div class="timeline" style="margin-left: 8px; margin-top: 12px">
+      {
+        timeline.map((t) => (
+          <div class:list={['t-item', t.current && 'current']}>
+            <div class="t-when">{t.when}</div>
+            <div class="t-role">{t.role}</div>
+            <div class="t-co">{t.co}</div>
+            <ul>
+              {t.bullets.map((b) => (
+                <li>{b}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="content" style="padding: 36px 40px 20px">
+    <SectionHead num="02" title="Tools in the shop" />
+    <div class="grid grid-2">
+      {
+        Object.entries(skills).map(([k, v]) => (
+          <div
+            class="skill-group"
+            style="border: 1px solid var(--rule); padding: 18px 20px; background: var(--paper-2)"
+          >
+            <div class="g-label">{k}</div>
+            <div class="tags">
+              {v.map((s) => (
+                <span class="chip">{s}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="content" style="padding: 36px 40px 20px">
+    <div class="grid grid-2 about-bottom">
+      <div>
+        <SectionHead num="03" title="Education" />
+        <div style="padding: 20px 0; border-top: 1px solid var(--rule)">
+          <div style="font-family: var(--display); font-style: italic; font-size: 22px; color: var(--ink)">
+            BSc. Computer Science & Engineering
+          </div>
+          <div style="font-size: 13px; color: var(--ink-soft); margin-top: 4px">Northern University Bangladesh · 2017</div>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 6px; font-family: var(--mono)">CGPA 3.30 / 4.00</div>
+        </div>
+      </div>
+      <div>
+        <SectionHead num="04" title="Elsewhere" />
+        <div style="padding: 20px 0; border-top: 1px solid var(--rule); font-size: 13px; line-height: 2">
+          <div>
+            → <a class="inline" href="https://github.com/rajurayhan" target="_blank" rel="noreferrer">github.com/rajurayhan</a>
+          </div>
+          <div>
+            → <a class="inline" href="https://www.linkedin.com/in/rajurayhan" target="_blank" rel="noreferrer"
+              >linkedin.com/in/rajurayhan</a
+            >
+          </div>
+          <div>→ <a class="inline" href="mailto:send2raju.bd@gmail.com">send2raju.bd@gmail.com</a></div>
+          <div>→ +880 1849 699001</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</PortfolioLayout>
+
+<style>
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .strengths-strip {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+  @media (max-width: 500px) {
+    .strengths-strip {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

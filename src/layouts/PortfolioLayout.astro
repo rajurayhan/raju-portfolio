@@ -1,0 +1,45 @@
+---
+import '../styles/portfolio.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  navCurrent?: 'home' | 'work' | 'sulus' | 'about' | 'contact';
+}
+
+const { title = 'Raju Rayhan — Portfolio', description = 'Platform architect, AI voice & automation.', navCurrent = 'home' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <style is:global>
+      html, body { margin: 0; padding: 0; background: #0d0a07; }
+      #site-root { min-height: 100vh; }
+    </style>
+  </head>
+  <body>
+    <div id="site-root" class:list={['page', 'theme-dark', 'density-regular']} style="--accent: #e07a54; --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">
+      <slot />
+    </div>
+    <script is:inline>
+      (function () {
+        document.addEventListener('keydown', function (e) {
+          if (e.defaultPrevented) return;
+          if (e.metaKey || e.ctrlKey || e.altKey) return;
+          var t = e.target;
+          if (t && (t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement || t instanceof HTMLSelectElement)) return;
+          if (e.key === 'k' || e.key === 'K') {
+            e.preventDefault();
+            if (location.pathname !== '/work') location.href = '/work';
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

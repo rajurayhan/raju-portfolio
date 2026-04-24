@@ -1,0 +1,14 @@
+---
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+const row = items.join('  ');
+---
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span>{row}</span>
+    <span>{row}</span>
+  </div>
+</div>

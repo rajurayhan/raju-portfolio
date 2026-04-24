@@ -1,0 +1,62 @@
+---
+import PortfolioLayout from '../layouts/PortfolioLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import Footer from '../components/Footer.astro';
+import ContactForm from '../components/vue/ContactForm.vue';
+---
+
+<PortfolioLayout title="Contact — Raju Rayhan">
+  <TopBar current="contact" />
+  <div class="content" style="padding: 64px 40px 40px">
+    <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 16px">§ Start a conversation</div>
+        <h1 class="display" style="font-size: clamp(40px, 5vw, 80px); margin: 0; line-height: 0.95">
+          <span style="font-style: italic">Let's</span> trade
+          <br />
+          a few <span style="color: var(--accent)">emails</span>.
+        </h1>
+        <div
+          style="font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--ink-soft); margin-top: 24px; line-height: 1.55; max-width: 440px"
+        >
+          I reply within two working days, in full sentences, from my actual keyboard.
+        </div>
+        <div style="margin-top: 40px; border-top: 1px solid var(--rule); padding-top: 20px">
+          <div class="eyebrow" style="margin-bottom: 12px">Direct</div>
+          <div style="font-size: 13px; line-height: 2">
+            <div>✉ <a class="inline" href="mailto:send2raju.bd@gmail.com">send2raju.bd@gmail.com</a></div>
+            <div>☏ +880 1849 699001</div>
+            <div>✦ Dhaka, Bangladesh — UTC+6</div>
+          </div>
+        </div>
+        <div style="margin-top: 28px; border-top: 1px solid var(--rule); padding-top: 20px">
+          <div class="eyebrow" style="margin-bottom: 12px">Good fits</div>
+          <ul style="padding-left: 0; list-style: none; font-size: 13px; line-height: 1.8; color: var(--ink-soft)">
+            <li>+ AI platform / architecture reviews</li>
+            <li>+ MCP server builds (Laravel-first, but flexible)</li>
+            <li>+ Voice-AI infrastructure — Pipecat, Deepgram, 11Labs</li>
+            <li>+ Fractional Head of Engineering (3—6 months)</li>
+            <li>− Pure frontend / design work — not my strength</li>
+            <li>− Sub-2-week sprints — I do thoughtful, not frantic</li>
+          </ul>
+        </div>
+        <div class="note" style="margin-top: 36px; max-width: 300px; transform: rotate(-2deg)">
+          P.S. If you're a founder, just send a one-paragraph sketch of the problem. No deck required. I'd rather read
+          your messy thinking than a polished ask.
+        </div>
+      </div>
+      <div>
+        <ContactForm client:load />
+      </div>
+    </div>
+  </div>
+  <Footer />
+</PortfolioLayout>
+
+<style>
+  @media (max-width: 960px) {
+    .contact-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

@@ -1,0 +1,179 @@
+---
+import PortfolioLayout from '../../layouts/PortfolioLayout.astro';
+import TopBar from '../../components/TopBar.astro';
+import Footer from '../../components/Footer.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import CaseDecision from '../../components/CaseDecision.astro';
+---
+
+<PortfolioLayout title="DSS HRMS — Case study">
+  <TopBar current="sulus" />
+  <div
+    class="content"
+    style="border-bottom: 1px solid var(--rule); padding: 12px 0; font-size: 11px; color: var(--muted); font-family: var(--mono); max-width: 1100px; margin: 0 auto; padding-left: 40px; padding-right: 40px; box-sizing: border-box"
+  >
+    <a href="/work" style="color: inherit; text-decoration: none">← work</a>
+    <span style="margin: 0 10px">/</span>
+    <span style="color: var(--ink)">dss hrms</span>
+  </div>
+  <div class="detail-hero">
+    <div class="content" style="padding: 0">
+      <div class="kicker">
+        <span>Case 06</span>
+        <span style="color: var(--muted)">·</span>
+        <span style="color: var(--muted)">2022</span>
+        <span style="color: var(--muted)">·</span>
+        <span style="color: var(--muted)">Government HRMS</span>
+      </div>
+      <h1>DSS <span style="font-style: italic; color: var(--accent)">HRMS</span></h1>
+      <div class="sub">
+        A full-suite human resources management system for the Department of Social Services, Government of Bangladesh.
+        Payroll, attendance, leave, and loan modules wired into a single, role-scoped platform serving a nationwide
+        civil-service workforce.
+      </div>
+      <div style="display: flex; gap: 8px; margin-top: 22px; flex-wrap: wrap">
+        {['Laravel', 'Angular', 'MySQL', 'Redis', 'Docker', 'REST APIs'].map((t) => <span class="chip">{t}</span>)}
+      </div>
+    </div>
+  </div>
+  <div class="content" style="padding: 40px 40px">
+    <div class="case-metrics" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px">
+      <div class="metric"><div class="v">4</div><div class="k">Modules · payroll→loans</div></div>
+      <div class="metric"><div class="v">gov</div><div class="k">DSS · Bangladesh</div></div>
+      <div class="metric"><div class="v">N×</div><div class="k">District offices covered</div></div>
+      <div class="metric"><div class="v">∞</div><div class="k">Audit retention</div></div>
+    </div>
+  </div>
+  <div class="content" style="padding: 36px 40px">
+    <SectionHead num="01" title="The brief" />
+    <div class="case-two">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 8px">Context</div>
+        <p style="font-size: 13.5px; line-height: 1.7; color: var(--ink-soft)">
+          The Department of Social Services runs welfare programs across every district of Bangladesh. Its workforce
+          was managed across ledgers, spreadsheets, and a handful of loosely-connected tools. The brief was to replace all
+          of it with one HRMS that an officer in Dhaka and a clerk in a district office could both trust.
+        </p>
+        <div class="eyebrow" style="margin-bottom: 8px; margin-top: 22px">Constraints</div>
+        <ul style="padding-left: 18px; font-size: 13px; line-height: 1.75; color: var(--ink-soft)">
+          <li>Government-grade auditability — every payroll cycle had to be reproducible years later.</li>
+          <li>Role hierarchy mirrored the civil-service org chart — not a generic RBAC model.</li>
+          <li>Spotty connectivity at the edges; the UI had to survive a bad line.</li>
+          <li>Bangla and English side-by-side, including in printable artefacts.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="note" style="width: 100%; transform: rotate(-1.5deg)">
+          In government software, the interesting work isn't the features — it's making the boring parts (payroll,
+          leave, loan repayments) behave identically every month, forever.
+          <div style="margin-top: 12px; font-size: 12px; font-family: var(--mono); color: var(--muted); font-style: normal">
+            — lesson from cycle one
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content" style="padding: 36px 40px">
+    <SectionHead num="02" title="The architecture" meta="simplified" />
+    <pre class="ascii-box">           ┌──────────────────────────────────────────┐
+           │   Angular SPA · role-scoped dashboards   │
+           │   (officer · clerk · auditor · admin)    │
+           └────────────────────┬─────────────────────┘
+                                │
+                    ┌───────────▼────────────┐
+                    │   Laravel REST API     │
+                    │   · session + policy   │
+                    │   · bilingual renderer │
+                    └───┬───┬───┬───┬────────┘
+                        │   │   │   │
+            ┌───────────┘   │   │   └────────────┐
+            │               │   │                │
+   ┌────────▼──────┐ ┌──────▼─┐ ┌────▼──────┐ ┌──▼────────┐
+   │  Payroll      │ │Attend. │ │  Leave    │ │   Loan    │
+   │ · cycles      │ │ · shift│ │ · balance │ │ · schedule│
+   │ · deductions  │ │ · bio- │ │ · routing │ │ · repay-  │
+   │ · bank file   │ │  metric│ │   workflow│ │   ments   │
+   └────────┬──────┘ └──┬─────┘ └────┬──────┘ └──┬────────┘
+            │           │            │           │
+            └───────────┴────┬───────┴───────────┘
+                             │
+                    ┌────────▼────────┐    ┌──────────┐
+                    │     MySQL       │◄───┤  Redis   │
+                    │  · partitioned  │    │ · cache  │
+                    │  · audit table  │    │ · queues │
+                    └─────────────────┘    └──────────┘</pre>
+  </div>
+  <div class="content" style="padding: 36px 40px">
+    <SectionHead num="03" title="A few decisions" />
+    <CaseDecision num="03.1" title="Payroll as an immutable ledger, not an editable table">
+      Each payroll cycle was written once and never mutated. Corrections happened as explicit reversal + re-issue
+      entries. Three years in, when an auditor asked why a 2022 cycle looked the way it did, we could replay it
+      byte-for-byte — including the bugs we'd since fixed.
+    </CaseDecision>
+    <CaseDecision num="03.2" title="Role hierarchy mirrored the org chart">
+      Rather than building abstract roles and wiring permissions into them, we modeled the actual DSS civil-service
+      hierarchy as a first-class graph. A district officer's view was derived from their position in the graph, not from a
+      hand-maintained permission list.
+    </CaseDecision>
+    <CaseDecision num="03.3" title="Offline-tolerant submissions, explicit sync state">
+      Attendance clerks in weak-signal districts needed forms to submit reliably. The client queued submissions locally,
+      surfaced sync state to the user honestly ('3 entries pending · last synced 11:42'), and refused to silently lose
+      anything.
+    </CaseDecision>
+    <CaseDecision num="03.4" title="Bilingual artefacts, not bilingual UI">
+      The app UI was English; printable artefacts — pay slips, leave orders, loan agreements — were always rendered with
+      both Bangla and English side-by-side, from the same templating layer. One source of truth, two audiences.
+    </CaseDecision>
+  </div>
+  <div class="content" style="padding: 36px 40px">
+    <SectionHead num="04" title="Outcomes" />
+    <div class="grid grid-2">
+      <div style="padding: 24px; border: 1px solid var(--rule); background: var(--paper-2)">
+        <div class="eyebrow" style="color: var(--muted); margin-bottom: 10px">Before</div>
+        <ul style="padding-left: 16px; font-size: 13px; line-height: 1.8; color: var(--ink-soft)">
+          <li>Payroll across spreadsheets, reconciled by hand every month</li>
+          <li>Leave requests moving on paper, with weeks of lag</li>
+          <li>Loan repayment schedules tracked in parallel systems</li>
+          <li>Attendance data fragmented across district offices</li>
+        </ul>
+      </div>
+      <div style="padding: 24px; border: 1px solid var(--ink); background: var(--paper)">
+        <div class="eyebrow" style="color: var(--accent); margin-bottom: 10px">After</div>
+        <ul style="padding-left: 16px; font-size: 13px; line-height: 1.8; color: var(--ink-soft)">
+          <li>One HRMS across payroll, attendance, leave, and loans</li>
+          <li>Reproducible payroll cycles — every run auditable</li>
+          <li>Leave workflows digital, routed by org hierarchy</li>
+          <li>District offices online, offline-tolerant, honestly sync-aware</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="content" style="padding: 48px 40px 24px">
+    <div
+      style="display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-top: 1px dashed var(--rule); border-bottom: 1px dashed var(--rule); flex-wrap: wrap; gap: 12px"
+    >
+      <div>
+        <div class="eyebrow" style="margin-bottom: 4px">Back to</div>
+        <div class="display" style="font-size: 28px; font-style: italic">The Casebook</div>
+      </div>
+      <a class="arrow-link" href="/work">All projects →</a>
+    </div>
+  </div>
+  <Footer />
+</PortfolioLayout>
+
+<style>
+  .case-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  @media (max-width: 800px) {
+    .case-two {
+      grid-template-columns: 1fr;
+    }
+    .case-metrics {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+</style>

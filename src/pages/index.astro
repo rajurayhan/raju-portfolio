@@ -1,17 +1,221 @@
 ---
-
+import PortfolioLayout from '../layouts/PortfolioLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import Ticker from '../components/Ticker.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<PortfolioLayout title="Raju Rayhan — Portfolio">
+  <TopBar current="home" />
+  <div class="content" style="padding: 80px 40px 60px; position: relative">
+    <div style="display: grid; grid-template-columns: 1fr 280px; gap: 60px; align-items: start">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 22px">{'// File: portfolio/index — last touched 24.04.2026'}</div>
+        <h1 class="display" style="font-size: clamp(48px, 8vw, 112px); margin: 0; color: var(--ink)">
+          I build <span style="color: var(--accent)">quiet</span>,<br />
+          <span style="font-style: italic">well-made</span> software<br />
+          for the messy <span style="font-style: italic; color: var(--sage)">edges</span><br />
+          of AI.
+        </h1>
+        <div style="display: flex; gap: 14px; margin-top: 38px; flex-wrap: wrap">
+          <a class="btn" href="/contact">Start a conversation →</a>
+          <a class="btn ghost" href="/work">Read the casebook</a>
+          <span style="font-size: 11px; color: var(--muted); align-self: center; margin-left: 8px">
+            or press <span class="chip" style="padding: 2px 6px">K</span> for the index
+          </span>
+        </div>
+      </div>
+      <div style="font-family: var(--mono); font-size: 12px; color: var(--ink-soft)">
+        <div class="rule-ascii">────────────────────────</div>
+        <div style="padding: 14px 0; display: grid; gap: 12px">
+          <div>
+            <div class="eyebrow" style="font-size: 10px">Currently</div>
+            <div>Head of Development</div>
+            <div style="color: var(--muted)">@ Sulus.ai (Apr 2026 →)</div>
+          </div>
+          <div>
+            <div class="eyebrow" style="font-size: 10px">Based</div>
+            <div>Dhaka, BD · UTC+6</div>
+          </div>
+          <div>
+            <div class="eyebrow" style="font-size: 10px">Available for</div>
+            <div>Fractional architecture,</div>
+            <div>AI platform advisory,</div>
+            <div>MCP / voice-AI builds</div>
+          </div>
+        </div>
+        <div class="rule-ascii">────────────────────────</div>
+      </div>
+    </div>
+    <div class="note" style="position: absolute; top: 110px; right: -10px; width: 180px; transform: rotate(2deg)">
+      Ten years of shipping. Mostly in the quiet hours before standup.
+    </div>
+  </div>
+  <Ticker
+    items={[
+      'MCP server development',
+      'RAG & vector search',
+      'Voice AI infrastructure',
+      'Multi-tenant SaaS',
+      'n8n orchestration',
+      'Claude & OpenAI APIs',
+      'Team leadership',
+      'Laravel · Vue · NestJS',
+      'Supabase · Pinecone',
+    ]}
+  />
+  <div class="content" style="padding: 72px 40px 40px">
+    <SectionHead num="01" title="Selected work" meta="2019 — 2026" />
+    <div class="grid grid-2">
+      <a class="project-card" href="/work/sulus" style="text-decoration: none; color: inherit; display: block">
+        <div style="position: absolute; top: 16px; right: 16px">
+          <span class="stamp">case study</span>
+        </div>
+        <div class="p-head">
+          <div>
+            <div class="eyebrow" style="margin-bottom: 6px; font-size: 10px">Platform architecture</div>
+            <div class="p-title">Sulus.ai</div>
+          </div>
+          <div class="p-year">2023—26</div>
+        </div>
+        <div class="p-desc">
+          White-label, multi-tenant SaaS for AI voice agents. Reseller model, Pinecone KB, n8n orchestration, Claude API.
+        </div>
+        <div class="p-tags">
+          {['Laravel', 'Vue', 'Pinecone', 'n8n', 'GHL'].map((t) => <span>{t}</span>)}
+        </div>
+      </a>
+      <a class="project-card" href="/work/edp" style="text-decoration: none; color: inherit; display: block">
+        <div style="position: absolute; top: 16px; right: 16px">
+          <span class="stamp">case study</span>
+        </div>
+        <div class="p-head">
+          <div>
+            <div class="eyebrow" style="margin-bottom: 6px; font-size: 10px">Government procurement</div>
+            <div class="p-title">eDP</div>
+          </div>
+          <div class="p-year">2019—23</div>
+        </div>
+        <div class="p-desc">
+          Defense procurement platform for Bangladesh Ministry of Defense (DGDP). Microservices, high-security, Oracle DB.
+        </div>
+        <div class="p-tags">
+          {['Java', 'Spring Boot', 'React', 'Oracle', 'Redis'].map((t) => <span>{t}</span>)}
+        </div>
+      </a>
+      <a class="project-card" href="/work/hive" style="text-decoration: none; color: inherit; display: block">
+        <div style="position: absolute; top: 16px; right: 16px">
+          <span class="stamp">case study</span>
+        </div>
+        <div class="p-head">
+          <div>
+            <div class="eyebrow" style="margin-bottom: 6px; font-size: 10px">Internal AI ops</div>
+            <div class="p-title">The Hive</div>
+          </div>
+          <div class="p-year">2024</div>
+        </div>
+        <div class="p-desc">
+          Meeting summaries, action items, scope generation. Yelp-webhook leads auto-answered by an AI agent.
+        </div>
+        <div class="p-tags">
+          {['Laravel', 'NestJS', 'OpenAI', 'Slack', 'Yelp API'].map((t) => <span>{t}</span>)}
+        </div>
+      </a>
+      <a class="project-card" href="/work/learnwithai" style="text-decoration: none; color: inherit; display: block">
+        <div class="p-head">
+          <div>
+            <div class="eyebrow" style="margin-bottom: 6px; font-size: 10px">Personal project</div>
+            <div class="p-title">LearnWithAI.BD</div>
+          </div>
+          <div class="p-year">2025</div>
+        </div>
+        <div class="p-desc">
+          A Bangla-first AI programming mentor for Bangladeshi developers. Waitlist beta shipped.
+        </div>
+        <div class="p-tags">
+          {['Laravel', 'Vue', 'Inertia', 'Claude API'].map((t) => <span>{t}</span>)}
+        </div>
+      </a>
+    </div>
+    <div style="margin-top: 28px; text-align: right">
+      <a class="arrow-link" href="/work">Full project index</a>
+    </div>
+  </div>
+  <div class="content" style="padding: 40px 40px 20px">
+    <SectionHead num="02" title="Working with" />
+    <div class="grid grid-3">
+      <div>
+        <div class="accent-bar" />
+        <div style="font-family: var(--display); font-style: italic; font-size: 24px; margin-bottom: 8px">
+          Founders shipping AI
+        </div>
+        <div style="font-size: 12.5px; color: var(--ink-soft); line-height: 1.6">
+          You have a working prototype and need it to survive real customers. I join for 3—6 months and leave the codebase
+          sturdier than I found it.
+        </div>
+      </div>
+      <div>
+        <div class="accent-bar" />
+        <div style="font-family: var(--display); font-style: italic; font-size: 24px; margin-bottom: 8px">
+          Agencies & studios
+        </div>
+        <div style="font-size: 12.5px; color: var(--ink-soft); line-height: 1.6">
+          White-label AI voice, MCP connectors, n8n orchestration for client work. I've shipped reseller SaaS end-to-end
+          and know where the sharp edges are.
+        </div>
+      </div>
+      <div>
+        <div class="accent-bar" />
+        <div style="font-family: var(--display); font-style: italic; font-size: 24px; margin-bottom: 8px">
+          Teams of one-too-few
+        </div>
+        <div style="font-size: 12.5px; color: var(--ink-soft); line-height: 1.6">
+          Fractional Head of Development — architecture, code review, hiring, and the occasional on-call. Remote, calm,
+          documented.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content" style="padding: 56px 40px 20px">
+    <SectionHead num="03" title="whoami" />
+    <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 36px; align-items: start" class="whoami-grid">
+      <div class="term">
+        <div><span class="c-prompt">raju@studio</span>:<span class="c-key">~</span>$ <span>whoami --long</span></div>
+        <div style="margin-top: 10px">
+          <span class="c-comment">// profile.txt</span><br />
+          name : <span class="c-key">Raju Rayhan</span><br />
+          role : <span class="c-key">Platform architect · AI engineer · team lead</span><br />
+          experience : <span class="c-ok">10+ years</span> production SaaS<br />
+          focus_2026 : <span class="c-key">MCP servers, voice AI, RAG, multi-tenant SaaS</span><br />
+          team : distributed, async, document-first<br />
+          <br />
+          <span class="c-prompt">raju@studio</span>:<span class="c-key">~</span>$ <span>availability --next 90d</span><br />
+          <span class="c-ok">✓ Taking 1 new engagement</span> · start Q3 2026
+        </div>
+      </div>
+      <div>
+        <div style="font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.5; color: var(--ink)">
+          I started writing software in 2016 on small business tools for clients I never met in person. A decade later I
+          mostly build AI platforms — but the craft is the same. Get the boring bits right, and the clever bits get to
+          shine.
+        </div>
+        <div style="margin-top: 24px">
+          <a class="arrow-link" href="/about">Read the long version</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</PortfolioLayout>
+
+<style>
+  @media (max-width: 960px) {
+    .content > div:first-of-type {
+      grid-template-columns: 1fr !important;
+    }
+    .whoami-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
