@@ -1,10 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const STORAGE = 'raju-theme';
 
-/** Same logic as `<head>` inline in PortfolioLayout — must not default to Day and then correct in onMounted (full page nav would flash). */
-function getInitialTheme(): 'light' | 'dark' {
+/**
+ * What the user actually sees: `<html data-theme>`, set by the inline
+ * script in `PortfolioLayout` before paint. That must match the buttons,
+ * including on `/` and after client navigations in dev.
+ */
+function readDocumentTheme(): 'light' | 'dark' | null {
+  if (typeof document === 'undefined') return null;
+  const a = document.documentElement.getAttribute('data-theme');
+  if (a === 'dark' || a === 'light') return a;
+  return null;
+}
+
+function readStoredTheme(): 'light' | 'dark' {
   if (typeof window === 'undefined') return 'light';
   try {
     const s = localStorage.getItem(STORAGE);
@@ -15,9 +26,13 @@ function getInitialTheme(): 'light' | 'dark' {
   }
 }
 
+function getInitialTheme(): 'light' | 'dark' {
+  return readDocumentTheme() ?? readStoredTheme();
+}
+
 const theme = ref<'light' | 'dark'>(getInitialTheme());
 
-function setTheme(next: 'light' | 'dark') {
+function applyTheme(next: 'light' | 'dark') {
   theme.value = next;
   document.documentElement.setAttribute('data-theme', next);
   try {
@@ -26,6 +41,25 @@ function setTheme(next: 'light' | 'dark') {
     /* private mode */
   }
 }
+
+function setTheme(next: 'light' | 'dark') {
+  applyTheme(next);
+}
+
+onMounted(() => {
+  // Re-sync: identical head script on every full load; fixes dev/HMR or any ordering gap.
+  const fromDom = readDocumentTheme();
+  if (fromDom && fromDom !== theme.value) {
+    theme.value = fromDom;
+  } else if (!fromDom) {
+    applyTheme(readStoredTheme());
+  }
+  window.addEventListener('storage', (e) => {
+    if (e.key !== STORAGE || !e.newValue) return;
+    const v = e.newValue;
+    if (v === 'light' || v === 'dark') theme.value = v;
+  });
+});
 </script>
 
 <template>
