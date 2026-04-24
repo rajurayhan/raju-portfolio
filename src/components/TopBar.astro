@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from './vue/ThemeToggle.vue';
+
 interface Props {
   current: 'home' | 'work' | 'sulus' | 'about' | 'contact';
 }
@@ -34,8 +36,14 @@ const items: { id: 'home' | 'work' | 'sulus' | 'about' | 'contact'; label: strin
       ))
     }
   </nav>
-  <div class="status">
-    <span class="status-dot" />
-    <span>Available · Q3 2026</span>
+  <div
+    class="topbar-right"
+    style="display: flex; align-items: center; gap: 20px; flex-shrink: 0; flex-wrap: wrap"
+  >
+    <ThemeToggle client:load />
+    <div class="status">
+      <span class="status-dot" />
+      <span>Available · Q3 2026</span>
+    </div>
   </div>
 </header>

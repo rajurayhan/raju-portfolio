@@ -2,6 +2,8 @@
 const gh = 'https://github.com/rajurayhan';
 const li = 'https://www.linkedin.com/in/rajurayhan';
 const email = 'mailto:send2raju.bd@gmail.com';
+const phone = 'tel:+8801849699001';
+const phoneLabel = '+880 1849 699001';
 ---
 
 <footer class="footer">
@@ -14,16 +16,14 @@ const email = 'mailto:send2raju.bd@gmail.com';
   </div>
   <div class="cols">
     <div>
-      <div class="eyebrow" style="margin-bottom: 10px; font-size: 10px">Elsewhere</div>
-      <a href={gh} target="_blank" rel="noreferrer">github.com/rajurayhan</a>
-      <a href={li} target="_blank" rel="noreferrer">linkedin.com/in/rajurayhan</a>
-      <a href={email}>send2raju.bd@gmail.com</a>
+      <div class="eyebrow" style="margin-bottom: 10px; font-size: 10px">Social</div>
+      <a href={gh} target="_blank" rel="noreferrer">GitHub</a>
+      <a href={li} target="_blank" rel="noreferrer">LinkedIn</a>
     </div>
     <div>
-      <div class="eyebrow" style="margin-bottom: 10px; font-size: 10px">Colophon</div>
-      <div>JetBrains Mono · Instrument Serif</div>
-      <div>Hand-set in HTML, 2026</div>
-      <a href="/colophon" style="margin-top: 8px; color: var(--accent)">Astro + Vue + MDX</a>
+      <div class="eyebrow" style="margin-bottom: 10px; font-size: 10px">Elsewhere</div>
+      <a href={email}>send2raju.bd@gmail.com</a>
+      <a href={phone}>{phoneLabel}</a>
     </div>
   </div>
 </footer>
