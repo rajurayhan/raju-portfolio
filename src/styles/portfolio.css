@@ -684,7 +684,7 @@ html[data-theme='dark'] .term .c-key,
   color: var(--ink);
   line-height: 1;
 }
-/* Public headshot: public/me.jpg → /me.jpg */
+/* Public headshot: public/me-headshot.png → /me-headshot.png */
 .avatar--photo {
   display: block;
   padding: 0;
