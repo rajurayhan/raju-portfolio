@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 const STORAGE = 'raju-theme';
 
@@ -46,19 +46,52 @@ function setTheme(next: 'light' | 'dark') {
   applyTheme(next);
 }
 
-onMounted(() => {
-  // Re-sync: identical head script on every full load; fixes dev/HMR or any ordering gap.
-  const fromDom = readDocumentTheme();
-  if (fromDom && fromDom !== theme.value) {
-    theme.value = fromDom;
-  } else if (!fromDom) {
+function syncUIFromDocument() {
+  const d = readDocumentTheme();
+  if (d) {
+    if (d !== theme.value) theme.value = d;
+  } else {
     applyTheme(readStoredTheme());
   }
-  window.addEventListener('storage', (e) => {
-    if (e.key !== STORAGE || !e.newValue) return;
-    const v = e.newValue;
-    if (v === 'light' || v === 'dark') theme.value = v;
-  });
+}
+
+declare global {
+  interface Window {
+    __rajuApplyTheme?: () => string;
+  }
+}
+
+function onPageShow(e: PageTransitionEvent) {
+  if (!e.persisted) return;
+  if (window.__rajuApplyTheme) {
+    window.__rajuApplyTheme();
+  } else {
+    try {
+      const t = readStoredTheme();
+      document.documentElement.setAttribute('data-theme', t);
+    } catch {
+      /* noop */
+    }
+  }
+  syncUIFromDocument();
+}
+
+function onStorage(e: StorageEvent) {
+  if (e.key !== STORAGE || !e.newValue) return;
+  const v = e.newValue;
+  if (v === 'light' || v === 'dark') applyTheme(v);
+}
+
+onMounted(() => {
+  // Re-sync: head script on every full load; fixes dev/HMR or any island ordering gap.
+  syncUIFromDocument();
+  window.addEventListener('pageshow', onPageShow);
+  window.addEventListener('storage', onStorage);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('pageshow', onPageShow);
+  window.removeEventListener('storage', onStorage);
 });
 </script>
 
