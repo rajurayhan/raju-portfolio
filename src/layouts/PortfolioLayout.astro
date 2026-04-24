@@ -1,13 +1,65 @@
 ---
 import '../styles/portfolio.css';
+import {
+  SITE_NAME,
+  DEFAULT_TITLE,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_OG_IMAGE,
+  LOCALE,
+  THEME_COLOR,
+  GITHUB_URL,
+  toAbsoluteImageUrl,
+  toCanonicalUrl,
+} from '../constants/siteMeta';
 
 interface Props {
   title?: string;
   description?: string;
-  navCurrent?: 'home' | 'work' | 'sulus' | 'about' | 'contact';
+  /** Path (e.g. `/me-headshot.png`) or absolute URL for og:image & twitter:image */
+  image?: string;
+  ogType?: 'website' | 'article';
+  twitterCard?: 'summary' | 'summary_large_image';
+  noindex?: boolean;
 }
 
-const { title = 'Raju Rayhan — Portfolio', description = 'Platform architect, AI voice & automation.', navCurrent = 'home' } = Astro.props;
+const {
+  title = DEFAULT_TITLE,
+  description = DEFAULT_DESCRIPTION,
+  image = DEFAULT_OG_IMAGE,
+  ogType = 'website',
+  twitterCard = 'summary_large_image',
+  noindex = false,
+} = Astro.props;
+
+const canonical = toCanonicalUrl(Astro.site, Astro.url);
+const ogImage = toAbsoluteImageUrl(image, Astro.site, Astro.url);
+const siteRoot = Astro.site?.href ?? `${Astro.url.origin}/`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: canonical,
+      isPartOf: { '@id': `${siteRoot}#website` },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteRoot}#website`,
+      name: SITE_NAME,
+      url: siteRoot,
+      description: DEFAULT_DESCRIPTION,
+      publisher: {
+        '@type': 'Person',
+        name: SITE_NAME,
+        url: siteRoot,
+        sameAs: [GITHUB_URL],
+      },
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -37,9 +89,29 @@ const { title = 'Raju Rayhan — Portfolio', description = 'Platform architect, 
     </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content={THEME_COLOR} />
+    <meta name="application-name" content={SITE_NAME} />
+    <meta name="author" content={SITE_NAME} />
+    <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content={LOCALE} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <style is:global>
       #site-root {
         min-height: 100vh;
