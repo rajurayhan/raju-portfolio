@@ -1,8 +1,9 @@
 /** Default site label and images — override per page via PortfolioLayout props */
 export const SITE_NAME = 'Raju Rayhan';
-export const DEFAULT_TITLE = 'Raju Rayhan — Head of Development & AI Platform Architect';
-export const DEFAULT_DESCRIPTION =
-  'Head of Development at Sulus.ai. I architect production software: AI voice, SaaS, RAG, automation. 10+ years. Engineering lead, remote, Dhaka, Bangladesh.';
+/** Shown in `<title>`, `og:title`, and JSON-LD where pages use defaults */
+export const ROLE_IN_TITLE = 'Head of Development @ Sulus.ai';
+export const DEFAULT_TITLE = `Raju Rayhan — ${ROLE_IN_TITLE}`;
+export const DEFAULT_DESCRIPTION = `${ROLE_IN_TITLE}. I architect production software: AI voice, SaaS, RAG, automation. 10+ years. Engineering lead, remote, Dhaka, Bangladesh.`;
 export const DEFAULT_OG_IMAGE = '/me-headshot.png';
 export const LOCALE = 'en_US';
 export const THEME_COLOR = '#f2ece1';
