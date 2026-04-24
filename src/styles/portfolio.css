@@ -684,6 +684,21 @@ html[data-theme='dark'] .term .c-key,
   color: var(--ink);
   line-height: 1;
 }
+/* Public headshot: public/me.jpg → /me.jpg */
+.avatar--photo {
+  display: block;
+  padding: 0;
+}
+.avatar--photo::before { display: none; }
+.avatar--photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
 .avatar::after {
   content: 'R.R. · 2026';
   position: absolute;
