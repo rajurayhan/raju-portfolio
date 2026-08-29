@@ -23,7 +23,7 @@ const projects: P[] = [
     title: 'Sulus.ai',
     kind: 'Platform architecture · AI voice',
     client: 'Lighthouse Graphics',
-    desc: 'The Sulus ecosystem — voice SaaS plus Sulus MCP, Agents, Pins, n8n Admin MCP, Kimai Payroll, and The Hive. Resellers brand tenants; voice assistants configure in plain English.',
+    desc: 'The Sulus ecosystem — voice SaaS plus Sulus MCP, Agents, Grid, Pins, n8n Admin MCP, Kimai Payroll, and The Hive. Resellers brand tenants; voice assistants configure in plain English.',
     tags: ['Laravel', 'Vue.js', 'Supabase', 'Pinecone', 'GHL', 'n8n'],
     cats: ['Platform', 'AI / Voice'],
     link: true,

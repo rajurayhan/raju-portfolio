@@ -28,12 +28,22 @@ export const SULUS_ECOSYSTEM: EcosystemSystem[] = [
     name: 'Sulus Agents',
     tagline: 'MCP-native agent platform — connectors, file-backed context, OpenAI-compatible chat API.',
     tags: ['MCP', 'Claude', 'OpenAI', 'Connectors'],
+    url: 'https://app.sulus.ai',
+  },
+  {
+    id: 'grid',
+    name: 'SulusGrid',
+    tagline:
+      'GoHighLevel Conversation Provider — SMS/MMS via Sulus carrier, Wallet Charge billing, one 10DLC brand across locations.',
+    tags: ['GoHighLevel', 'SMS', 'GHL', 'Carrier'],
+    url: 'https://gateway.sulus.ai',
   },
   {
     id: 'pins',
     name: 'SulusPins',
     tagline: 'Visual feedback & bug-reporting — embeddable widget SDK, triage dashboard, MCP surface.',
     tags: ['Widget SDK', 'REST', 'MCP'],
+    url: 'https://pins.sulus.ai',
   },
   {
     id: 'n8n-mcp',
