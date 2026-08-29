@@ -17,7 +17,7 @@ import Footer from '../components/Footer.astro';
       style="display: grid; grid-template-columns: 1fr minmax(0, 280px); gap: 60px; align-items: start"
     >
       <div>
-        <div class="eyebrow" style="margin-bottom: 22px">{'// File: portfolio/index — last touched 24.04.2026'}</div>
+        <div class="eyebrow" style="margin-bottom: 22px">{'// File: portfolio/index — last touched 29.08.2026'}</div>
         <h1 class="display" style="font-size: clamp(48px, 8vw, 112px); margin: 0; color: var(--ink)">
           I build <span style="color: var(--accent)">quiet</span>,<br />
           <span style="font-style: italic">well-made</span> software<br />
@@ -63,6 +63,7 @@ import Footer from '../components/Footer.astro';
   </div>
   <Ticker
     items={[
+      'Sulus ecosystem',
       'MCP server development',
       'RAG & vector search',
       'Voice AI infrastructure',
@@ -89,10 +90,11 @@ import Footer from '../components/Footer.astro';
           <div class="p-year">2023—26</div>
         </div>
         <div class="p-desc">
-          White-label, multi-tenant SaaS for AI voice agents. Reseller model, Pinecone KB, n8n orchestration, Claude API.
+          The core platform plus the Sulus ecosystem — Agents, Pins, n8n MCP, Kimai Payroll, and The Hive. White-label
+          voice AI with reseller tenancy, Pinecone KB, and automation at every layer.
         </div>
         <div class="p-tags">
-          {['Laravel', 'Vue', 'Pinecone', 'n8n', 'GHL'].map((t) => <span>{t}</span>)}
+          {['Laravel', 'Vue', 'MCP', 'Pinecone', 'n8n'].map((t) => <span>{t}</span>)}
         </div>
       </a>
       <a class="project-card" href="/work/edp" style="text-decoration: none; color: inherit; display: block">
@@ -194,8 +196,9 @@ import Footer from '../components/Footer.astro';
         <div style="margin-top: 10px">
           <span class="c-comment">// profile.txt</span><br />
           name : <span class="c-key">Raju Rayhan</span><br />
-          role : <span class="c-key">Platform architect · AI engineer · team lead</span><br />
+          role : <span class="c-key">Head of Development @ Sulus.ai</span><br />
           experience : <span class="c-ok">10+ years</span> production SaaS<br />
+          ecosystem : <span class="c-key">Sulus.ai · Agents · Pins · n8n MCP · Payroll · The Hive</span><br />
           focus_2026 : <span class="c-key">MCP servers, voice AI, RAG, multi-tenant SaaS</span><br />
           team : distributed, async, document-first<br />
           <br />
@@ -206,8 +209,9 @@ import Footer from '../components/Footer.astro';
       <div>
         <div style="font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.5; color: var(--ink)">
           I started writing software in 2016 on small business tools for clients I never met in person. A decade later I
-          mostly build AI platforms — but the craft is the same. Get the boring bits right, and the clever bits get to
-          shine.
+          lead development at Sulus.ai — building the voice platform and the ecosystem around it: agent tooling, feedback
+          widgets, automation MCP, and the internal ops that keep the team moving. The craft is the same: get the boring
+          bits right, and the clever bits get to shine.
         </div>
         <div style="margin-top: 24px">
           <a class="arrow-link" href="/about">Read the long version</a>
