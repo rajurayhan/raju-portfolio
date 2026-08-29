@@ -3,6 +3,7 @@ export type EcosystemSystem = {
   name: string;
   tagline: string;
   tags: string[];
+  url?: string;
 };
 
 /** Systems built for the Sulus.ai product ecosystem */
@@ -12,6 +13,15 @@ export const SULUS_ECOSYSTEM: EcosystemSystem[] = [
     name: 'Sulus.ai',
     tagline: 'White-label, multi-tenant SaaS for AI voice agents — resellers, Pinecone KB, n8n orchestration.',
     tags: ['Laravel', 'Vue', 'Pinecone', 'Pipecat'],
+    url: 'https://sulus.ai',
+  },
+  {
+    id: 'sulus-mcp',
+    name: 'Sulus MCP',
+    tagline:
+      'Hosted MCP infrastructure — connector catalog, OAuth & API keys, workspace-scoped endpoints, no-code tool builder.',
+    tags: ['MCP', 'OAuth', 'Connectors', 'Streamable HTTP'],
+    url: 'https://mcp.sulus.ai',
   },
   {
     id: 'agents',
@@ -27,8 +37,8 @@ export const SULUS_ECOSYSTEM: EcosystemSystem[] = [
   },
   {
     id: 'n8n-mcp',
-    name: 'n8n MCP',
-    tagline: '35+ tool MCP server over automations.sulus.ai — workflow CRUD, webhooks, security audits.',
+    name: 'n8n Admin MCP',
+    tagline: 'Internal n8n ops MCP over automations.sulus.ai — workflow CRUD, webhooks, security audits.',
     tags: ['n8n', 'MCP', 'Automation'],
   },
   {

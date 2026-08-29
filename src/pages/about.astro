@@ -12,8 +12,8 @@ const timeline = [
     co: 'Sulus.ai · Full-time',
     bullets: [
       'Appointed Head of Development at Sulus.ai after its spin-out from Lighthouse Graphics.',
-      'Leading engineering across the Sulus ecosystem — voice SaaS, agent platform, automation MCP, feedback tooling, and payroll.',
-      'Shipping Sulus Agents (MCP-native agents + connectors), SulusPins (embeddable feedback widgets), and the n8n MCP admin surface.',
+      'Leading engineering across the Sulus ecosystem — voice SaaS, hosted MCP, agent platform, feedback tooling, and payroll.',
+      'Shipping Sulus MCP (mcp.sulus.ai), Sulus Agents, SulusPins, and the n8n admin MCP surface.',
       'Running biweekly payroll approvals on a custom Kimai plugin; The Hive still stitches Slack, ClickUp, and GHL together.',
     ],
     current: true,
@@ -177,7 +177,15 @@ const strengths = [
             class="skill-group"
             style="border: 1px solid var(--rule); padding: 18px 20px; background: var(--paper-2)"
           >
-            <div class="g-label">{s.name}</div>
+            <div class="g-label">
+              {s.url ? (
+                <a class="inline" href={s.url} target="_blank" rel="noreferrer">
+                  {s.name} ↗
+                </a>
+              ) : (
+                s.name
+              )}
+            </div>
             <div style="font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 12px">{s.tagline}</div>
             <div class="tags">
               {s.tags.map((t) => (
