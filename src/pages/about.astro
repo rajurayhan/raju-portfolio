@@ -3,6 +3,7 @@ import PortfolioLayout from '../layouts/PortfolioLayout.astro';
 import TopBar from '../components/TopBar.astro';
 import SectionHead from '../components/SectionHead.astro';
 import Footer from '../components/Footer.astro';
+import { SULUS_ECOSYSTEM } from '../constants/sulusEcosystem';
 
 const timeline = [
   {
@@ -11,7 +12,9 @@ const timeline = [
     co: 'Sulus.ai · Full-time',
     bullets: [
       'Appointed Head of Development at Sulus.ai after its spin-out from Lighthouse Graphics.',
-      'Overseeing engineering, product architecture, and technical strategy across the platform.',
+      'Leading engineering across the Sulus ecosystem — voice SaaS, hosted MCP, agent platform, feedback tooling, and payroll.',
+      'Shipping Sulus MCP (mcp.sulus.ai), Sulus Agents (app.sulus.ai), SulusGrid (gateway.sulus.ai), SulusPins (pins.sulus.ai), and the n8n admin MCP surface.',
+      'Running biweekly payroll approvals on a custom Kimai plugin; The Hive still stitches Slack, ClickUp, and GHL together.',
     ],
     current: true,
   },
@@ -100,9 +103,10 @@ const strengths = [
         <div
           style="font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--ink-soft); line-height: 1.55; margin-top: 28px; max-width: 620px"
         >
-          I'm Raju — a platform architect and full-stack lead based in Dhaka. I've spent the last ten years shipping
-          production SaaS systems, most recently in voice AI and intelligent automation. I like tidy abstractions, honest
-          documentation, and small teams that trust each other.
+          I'm Raju — Head of Development at Sulus.ai and the architect behind its product ecosystem. I've spent the last
+          ten years shipping production SaaS, most recently voice AI, MCP-native agents, and the internal systems that
+          keep a distributed team running. I like tidy abstractions, honest documentation, and small teams that trust
+          each other.
         </div>
         <div style="display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; align-items: center">
           <a class="btn" href="/contact">Work with me →</a>
@@ -165,7 +169,36 @@ const strengths = [
     </div>
   </div>
   <div class="content" style="padding: 36px 40px 20px">
-    <SectionHead num="02" title="Tools in the shop" />
+    <SectionHead num="02" title="The Sulus ecosystem" meta="systems I built & run" />
+    <div class="grid grid-2" style="margin-top: 12px">
+      {
+        SULUS_ECOSYSTEM.map((s) => (
+          <div
+            class="skill-group"
+            style="border: 1px solid var(--rule); padding: 18px 20px; background: var(--paper-2)"
+          >
+            <div class="g-label">
+              {s.url ? (
+                <a class="inline" href={s.url} target="_blank" rel="noreferrer">
+                  {s.name} ↗
+                </a>
+              ) : (
+                s.name
+              )}
+            </div>
+            <div style="font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 12px">{s.tagline}</div>
+            <div class="tags">
+              {s.tags.map((t) => (
+                <span class="chip">{t}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="content" style="padding: 36px 40px 20px">
+    <SectionHead num="03" title="Tools in the shop" />
     <div class="grid grid-2">
       {
         Object.entries(skills).map(([k, v]) => (
@@ -187,7 +220,7 @@ const strengths = [
   <div class="content" style="padding: 36px 40px 20px">
     <div class="grid grid-2 about-bottom">
       <div>
-        <SectionHead num="03" title="Education" />
+        <SectionHead num="04" title="Education" />
         <div style="padding: 20px 0; border-top: 1px solid var(--rule)">
           <div style="font-family: var(--display); font-style: italic; font-size: 22px; color: var(--ink)">
             BSc. Computer Science & Engineering
@@ -197,7 +230,7 @@ const strengths = [
         </div>
       </div>
       <div>
-        <SectionHead num="04" title="Elsewhere" />
+        <SectionHead num="05" title="Elsewhere" />
         <div style="padding: 20px 0; border-top: 1px solid var(--rule); font-size: 13px; line-height: 2">
           <div>
             → <a

@@ -4,6 +4,7 @@ import TopBar from '../../components/TopBar.astro';
 import Footer from '../../components/Footer.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import CaseDecision from '../../components/CaseDecision.astro';
+import { SULUS_ECOSYSTEM } from '../../constants/sulusEcosystem';
 ---
 
 <PortfolioLayout
@@ -169,6 +170,36 @@ import CaseDecision from '../../components/CaseDecision.astro';
     >
       In April 2026, Sulus spun out as its own company and I came with it as Head of Development. The platform is now
       the product — and the team has grown around it.
+    </div>
+  </div>
+  <div class="content" style="padding: 36px 40px">
+    <SectionHead num="06" title="The ecosystem" meta="beyond the core platform" />
+    <p style="font-size: 13.5px; line-height: 1.7; color: var(--ink-soft); max-width: 720px; margin: 0 0 24px">
+      Sulus.ai is the flagship — but production also runs on a family of systems I architected and still lead. Each has
+      its own surface (API, widget, or MCP) and plugs into the same automation and agent layer.
+    </p>
+    <div class="grid grid-2">
+      {
+        SULUS_ECOSYSTEM.filter((s) => s.id !== 'platform').map((s) => (
+          <div style="padding: 20px 22px; border: 1px solid var(--rule); background: var(--paper-2)">
+            <div class="eyebrow" style="margin-bottom: 6px">
+              {s.url ? (
+                <a class="inline" href={s.url} target="_blank" rel="noreferrer">
+                  {s.name} ↗
+                </a>
+              ) : (
+                s.name
+              )}
+            </div>
+            <div style="font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 12px">{s.tagline}</div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap">
+              {s.tags.map((t) => (
+                <span class="chip">{t}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
     </div>
   </div>
   <div class="content" style="padding: 48px 40px 24px">
